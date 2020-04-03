@@ -22,8 +22,6 @@ In a different terminal tab...
 npm start
 ```
 
-![Imgur](http://i.imgur.com/f7Nlvx4.png)
-
 ### What Is Happening Here?
 
 Create React App and the Express server are running on different processes. This is so that React can still use in memory Webpack to do hot reloads really fast.
