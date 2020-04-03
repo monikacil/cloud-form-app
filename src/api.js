@@ -3,11 +3,7 @@ const baseAPI = '/api';
 const elementsAPI = {
   get(element) {
     return new Promise((resolve, reject) => {
-      fetch(`${baseAPI}/elements`, {
-        params: {
-          email: element
-        }
-      })
+      fetch(`${baseAPI}/element/${element.email}`)
         .then(response => response.json())
         .then(json => resolve(json))
         .catch(err => {

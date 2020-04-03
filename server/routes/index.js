@@ -3,7 +3,7 @@ var router = express.Router();
 
 const elementService = require('../element-service');
 
-router.get('/elements', function(req, res, next) {
+router.get('/element/:email', function(req, res, next) {
   elementService.get(req, res)
 });
 

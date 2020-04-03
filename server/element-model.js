@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const elementSchema = new Schema(
   {
     email: String,
-    url: String
+    urls: Array
   }
 );
 

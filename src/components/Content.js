@@ -19,10 +19,6 @@ class Content extends Component {
     this.setEmail = this.setEmail.bind(this)
     this.setUrl = this.setUrl.bind(this)
   }
-  
-  componentDidMount() {
-    // elementsAPI.get().then( (json) => console.log(json))
-  }
 
   setEmail(event) {
     this.setState({ email: event.target.value })
@@ -33,15 +29,35 @@ class Content extends Component {
   }
 
   showInFrame = (el) => {
-    if (el.url !== this.state.selectedUrl) {
-      this.setState({selectedUrl: el.url})
+    if (el !== this.state.selectedUrl) {
+      this.setState({selectedUrl: el})
     }
   }
 
   handleSend = (event) => {
     event.preventDefault();
     if (this.validator.allValid()) {
-      elementsAPI.create({ email: this.state.email, url: this.state.url }).then( (json) => console.log(json))
+      elementsAPI.get({ email: this.state.email }).then( (user) => {
+        if(user !== null) {
+          let list = user.urls
+          if(!list.includes(this.state.url)) {
+            list.push(this.state.url)
+            elementsAPI.update({ email: user.email, urls: list }).then( (user) => {
+              this.setState({ urlsList: list, url: '' });
+              this.showInFrame()
+            })
+          } else {
+            alert('This url exist in database')
+          }
+        } else {
+          let list = []
+          list.push(this.state.url)
+          elementsAPI.create({ email: this.state.email, urls: list }).then( (user) => {
+            this.setState({ urlsList: list, url: '' });
+            this.showInFrame()
+          })
+        }
+      })
     } else {
       alert('Please fill all fields')
       this.forceUpdate();
@@ -51,9 +67,10 @@ class Content extends Component {
   handleShowList = () => {
     if (this.validator.fieldValid('email')) {
       elementsAPI.get({ email: this.state.email })
-      .then( (json) => {
-        if(json) {
-          this.setState({ urlsList: json.url })
+      .then( (user) => {
+        if(user) {
+          let list = user.urls
+          this.setState({ urlsList: list })
         }
       })
     }
@@ -85,8 +102,8 @@ class Content extends Component {
         <ul className="urlList">
           {this.state.urlsList.map( el => {
                 return (
-                  <li key={el.url} onClick={() => this.showInFrame(el)}
-                      className={el.url === this.state.selectedUrl ? 'selected' : ''}>{el.url}</li>
+                  <li key={el} onClick={() => this.showInFrame(el)}
+                      className={el === this.state.selectedUrl ? 'selected' : ''}>{el}</li>
                 )
               }
             )}

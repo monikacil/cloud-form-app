@@ -16,9 +16,9 @@ function get(req, res) {
 }
 
 function create(req, res) {
-  const { email, url } = req.body;
+  const { email, urls } = req.body;
 
-  const element = new Element({ email, url })
+  const element = new Element({ email, urls })
 
   element.save().then( () => {
     res.json(element);
@@ -27,5 +27,19 @@ function create(req, res) {
     res.status(500).send(err);
   });
 }
+
+function update(req, res) {
+  const { email, urls } = req.body;
+
+  Element.findOne({ email })
+    .then(element => {
+      element.email = email;
+      element.urls = urls;
+      element.save().then(res.json(element));
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+}
   
-  module.exports = { get, create };
+  module.exports = { get, create, update };
