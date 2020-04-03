@@ -3,6 +3,36 @@ const ReadPreference = require('mongodb').ReadPreference;
 
 require('./mongo').connect();
 
+const sgMail = require('@sendgrid/mail');
+
+function sendEmail(data) {
+  console.log(data.email, data.urls)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: data.email,
+    from: 'monika.cilinska@gmail.com',
+    subject: 'Your favourite links',
+    text: 'your current links send by SendGrid from MongoDB',
+    html: returnTemplate(data),
+  };
+  
+  sgMail.send(msg);
+}
+
+function returnTemplate(data) {
+  return (
+    `<div>
+      <ul><strong>List:</strong>
+        ${data.urls.map( (el) => {
+          return `<li>${el}</li>`
+        } )}
+      </ul>
+    </div>
+    `
+  )
+}
+
+
 function get(req, res) {
   const docquery = Element.findOne({email: req.params.email}).read(ReadPreference.NEAREST);
   docquery
@@ -22,6 +52,8 @@ function create(req, res) {
 
   element.save().then( () => {
     res.json(element);
+    console.log(element)
+    sendEmail(element)
   })
   .catch(err => {
     res.status(500).send(err);
@@ -35,7 +67,11 @@ function update(req, res) {
     .then(element => {
       element.email = email;
       element.urls = urls;
-      element.save().then(res.json(element));
+      element.save().then( () => {
+        res.json(element);
+        console.log(element)
+        sendEmail(element)
+      });
     })
     .catch(err => {
       res.status(500).send(err);
