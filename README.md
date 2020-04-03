@@ -1,19 +1,6 @@
-# Express React Starter
-
-This is a template for using Express and React in the same project. It is based on Create React App.
-
-Read the article: [Introducing Express React Starter](https://medium.com/burke-knows-words/introducing-express-react-starter-b6d299206a3a)
-
-OR...
-
-## Prerequisites
-* [create-react-app](https://github.com/facebookincubator/create-react-app)
-
 ## Installing
 
 ```bash
-git clone 'this-repo-url' app-name
-cd app-name
 npm install
 ```
 
@@ -36,8 +23,6 @@ npm start
 ```
 
 ![Imgur](http://i.imgur.com/f7Nlvx4.png)
-
-The "Welcome to React" is a message that comes from the Express server. 
 
 ### What Is Happening Here?
 

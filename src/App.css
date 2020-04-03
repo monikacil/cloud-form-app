@@ -1,24 +1,76 @@
-.App {
-  text-align: center;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.container {
+  width: 60%;
+  min-width: 500px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  margin: 10px auto;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+.content {
   padding: 20px;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+margin-top: 6px;
+margin-bottom: 16px;
+resize: vertical;
+}
+
+button {
+background-color: #4CAF50;
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+button:hover {
+background-color: #45a049;
+}
+
+#submit {
+  float: right;
+}
+
+.iframe {
+  margin-top: 35px;
+}
+
+iframe {
+  height: 300px;
+  width: 100%;
+}
+
+.urlList {
+  margin: 0 auto;
+  display: inline-block;
+  list-style-type: none;
+}
+
+li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #D6D6D6;
+  color: black;
+}
+
+.selected {
+  background-color: #45a049;
   color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
