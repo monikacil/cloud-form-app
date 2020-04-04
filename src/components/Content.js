@@ -102,7 +102,7 @@ class Content extends Component {
         <ul className="urlList">
           {this.state.urlsList.map( el => {
                 return (
-                  <li key={el} onClick={() => this.showInFrame(el)}
+                  <li key={el} title={el} onClick={() => this.showInFrame(el)}
                       className={el === this.state.selectedUrl ? 'selected' : ''}>{el}</li>
                 )
               }
