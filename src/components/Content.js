@@ -34,6 +34,17 @@ class Content extends Component {
     }
   }
 
+  deleteElement = (event, el) => {
+    event.stopPropagation();
+    let list = this.state.urlsList.filter( (_el) => {
+      return _el !== el
+    })
+    elementsAPI.update({ email: this.state.email, urls: list }).then( (user) => {
+      this.setState({ urlsList: list, url: '' });
+      this.showInFrame()
+      })
+  }
+
   handleSend = (event) => {
     event.preventDefault();
     if (this.validator.allValid()) {
@@ -103,7 +114,10 @@ class Content extends Component {
           {this.state.urlsList.map( el => {
                 return (
                   <li key={el} title={el} onClick={() => this.showInFrame(el)}
-                      className={el === this.state.selectedUrl ? 'selected' : ''}>{el}</li>
+                      className={el === this.state.selectedUrl ? 'selected' : ''}>{el}
+                      <i className="fa fa-trash" 
+                        title="Remove"
+                        onClick={(e) => this.deleteElement(e, el)}></i></li>
                 )
               }
             )}

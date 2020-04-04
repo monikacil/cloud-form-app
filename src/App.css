@@ -65,9 +65,22 @@ iframe {
 }
 
 li {
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   overflow: hidden;
+}
+
+i {
+  float: right;
+  color: red;
+  cursor: pointer;
+  padding: 7px;
+}
+
+i:hover {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
 }
 
 li:hover {

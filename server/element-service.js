@@ -74,5 +74,18 @@ function update(req, res) {
       res.status(500).send(err);
     });
 }
+
+function remove(req, res) {
+  const { url } = req.params;
+
+  Element.findOneAndRemove({ url })
+    .then(element => {
+      res.json(element);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+}
+
   
-  module.exports = { get, create, update };
+module.exports = { get, create, update, remove };

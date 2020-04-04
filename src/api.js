@@ -30,8 +30,16 @@ const elementsAPI = {
     });
   },
 
-  delete() {
-
+  remove(element) {
+    console.log(element)
+    return new Promise((resolve, reject) => {
+      fetch(`${baseAPI}/element/${element.url}`, { method: 'DELETE' })
+        .then(response => response.json())
+        .then(json => resolve(json))
+        .catch(err => {
+          reject(err);
+        });
+    });
   },
 
   update(element) {
