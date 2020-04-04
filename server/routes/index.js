@@ -15,8 +15,4 @@ router.post('/element', function(req, res, next) {
   elementService.update(req, res)
 });
 
-router.delete('/element/:url', (req, res) => {
-  elementService.remove(req, res);
-});
-
 module.exports = router;

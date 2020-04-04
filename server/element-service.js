@@ -51,7 +51,7 @@ function create(req, res) {
 
   element.save().then( () => {
     res.json(element);
-    sendEmail(element)
+    // sendEmail(element)
   })
   .catch(err => {
     res.status(500).send(err);
@@ -67,25 +67,12 @@ function update(req, res) {
       element.urls = urls;
       element.save().then( () => {
         res.json(element);
-        sendEmail(element)
+        // sendEmail(element)
       });
     })
     .catch(err => {
       res.status(500).send(err);
     });
 }
-
-function remove(req, res) {
-  const { url } = req.params;
-
-  Element.findOneAndRemove({ url })
-    .then(element => {
-      res.json(element);
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    });
-}
-
   
-module.exports = { get, create, update, remove };
+module.exports = { get, create, update };
