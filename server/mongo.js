@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const env = require('./env/environment');
+
 
 mongoose.Promise = global.Promise;
 
@@ -9,7 +11,7 @@ const option = {
   useNewUrlParser: true
 };
 
-const mongoUri = 'mongodb://cloud-form-db:jOTkLiWxRxLyzN1mh50hgsrkUwf3ofmkwqL6QtfOxFLZC43j71PJIJdQ8x7c6EGavGT2XrgfyUrANOGZp1WkKg==@cloud-form-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cloud-form-db@';
+const mongoUri = `mongodb://${env.name}:${env.dbKey}@${env.name}.mongo.cosmos.azure.com:${env.port}/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@${env.name}@`;
 
 function connect() {
   return mongoose.connect(mongoUri, option);

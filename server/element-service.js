@@ -4,9 +4,10 @@ const ReadPreference = require('mongodb').ReadPreference;
 require('./mongo').connect();
 
 const sgMail = require('@sendgrid/mail');
+const env = require('./env/environment');
 
 function sendEmail(data) {
-  sgMail.setApiKey('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');
+  sgMail.setApiKey(env.SGkey);
   const msg = {
     to: data.email,
     from: 'monika.cilinska@gmail.com',
